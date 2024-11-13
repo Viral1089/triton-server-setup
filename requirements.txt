@@ -1,0 +1,8 @@
+ultralytics
+onnx
+fastapi
+uvicorn
+pydantic
+python-multipart
+triton
+tritonclient[all]

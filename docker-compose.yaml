@@ -1,0 +1,30 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    depends_on:
+      - tritonserver
+      - tritonserver1
+  
+  tritonserver:
+    image: nvcr.io/nvidia/tritonserver:23.09-py3
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+      - "8002:8002"
+    volumes:
+      - .:/mnt
+    command: tritonserver --model-repository=/mnt/models
+     
+  tritonserver1:
+    image: nvcr.io/nvidia/tritonserver:23.09-py3
+    ports:
+      - "8005:8000"
+      - "8006:8001"
+      - "8007:8002"
+    volumes:
+      - .:/mnt
+    command: tritonserver --model-repository=/mnt/models
